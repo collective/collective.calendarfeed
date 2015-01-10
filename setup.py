@@ -26,8 +26,9 @@ setup(name='collective.fullcalendarioview',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'setuptools',
-          'z3c.jbot',
+         "setuptools",
+         "five.grok",
+         "plone.app.registry",
           # -*- Extra requirements: -*-
       ],
       entry_points="""

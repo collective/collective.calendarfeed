@@ -6,8 +6,8 @@
     <metal:block fill-slot="top_slot"
            tal:define="dummy python:request.set('disable_border',1)" />
      <metal:block fill-slot="style_slot">
-        <link href='++resource++collective.fullcalendarioview/static/fullcalendar/fullcalendar.css' rel='stylesheet' />
-        <link href='++resource++collective.fullcalendarioview/static/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+        <link href='++resource++collective.fullcalendarioview/fullcalendar/fullcalendar.css' rel='stylesheet' />
+        <link href='++resource++collective.fullcalendarioview/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
        <style>
 
 	body {
@@ -32,11 +32,11 @@
      </style>
     </metal:block>
       <metal:block fill-slot="javascript_head_slot">
-        <script src='++resource++collective.fullcalendarioview/static/fullcalendar/lib/moment.min.js'></script>
-        <script src='++resource++collective.fullcalendarioview/static/fullcalendar/lib/jquery.min.js'></script>
-        <script src='++resource++collective.fullcalendarioview/static/jquery-migrate-1.2.1.js'></script>
-        <script src='++resource++collective.fullcalendarioview/static/fullcalendar/fullcalendar.min.js'></script>
-        <script src='++resource++collective.fullcalendarioview/static/fullcalendar/gcal.js'></script>
+        <script src='++resource++collective.fullcalendarioview/fullcalendar/lib/moment.min.js'></script>
+        <script src='++resource++collective.fullcalendarioview/fullcalendar/lib/jquery.min.js'></script>
+        <script src='++resource++collective.fullcalendarioview/jquery-migrate-1.2.1.js'></script>
+        <script src='++resource++collective.fullcalendarioview/fullcalendar/fullcalendar.min.js'></script>
+        <script src='++resource++collective.fullcalendarioview/fullcalendar/gcal.js'></script>
         <script>
 
 	$(document).ready(function() {

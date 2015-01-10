@@ -1,0 +1,13 @@
+<registry>
+    <records interface="collective.fullcalendarioview.settings.ISettings" prefix="fullcalendarioview.settings.ISettings">
+        <!-- Set default values -->
+
+        <!-- Leave to empty string -->
+        <value key="apikey"></value>
+    </records>
+
+
+
+
+
+</registry>

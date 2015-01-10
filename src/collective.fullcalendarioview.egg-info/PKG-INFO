@@ -1,0 +1,24 @@
+Metadata-Version: 1.1
+Name: collective.fullcalendarioview
+Version: 1.0.0
+Summary: Collective FullCalendar.io view
+Home-page: http://github.com/pigeonflight/collective.fullcalendarview/
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: GPL
+Description: Introduction
+        ============
+        A simple fullcalendar.io view for Plone
+        
+        Changelog
+        =========
+        
+        1.0dev (unreleased)
+        -------------------
+        
+        - Initial release
+        
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
