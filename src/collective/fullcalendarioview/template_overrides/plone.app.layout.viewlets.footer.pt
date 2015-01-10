@@ -1,6 +1,0 @@
-<div id="portal-footer">
-     <p>Dr. John Patrick. Copyright <abbr title="Copyright">&copy;</abbr>
-              <tal:year  tal:content="view/year" />   
-     </p>
-
-</div>
