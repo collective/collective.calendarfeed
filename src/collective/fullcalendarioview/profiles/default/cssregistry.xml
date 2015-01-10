@@ -31,10 +31,10 @@ id="public.css"
 <stylesheet title="" applyPrefix="True" authenticated="False"
     bundle="default" cacheable="True" compression="safe" conditionalcomment=""
     cookable="True" enabled="on" expression=""
-    id="++resource++collective.fullcalendarview/static/jquery-ui-custom/jquery-ui.theme.min.css"
+    id="++resource++collective.fullcalendarioview/static/jquery-ui-custom/jquery-ui.theme.min.css"
     media="screen" rel="stylesheet" rendering="import"/>
 <stylesheet title=""
-    id="++resource++collective.fullcalendarview/static/main.css"
+    id="++resource++collective.fullcalendarioview/static/main.css"
     media="screen" rel="stylesheet" rendering="import"
     cacheable="True" compression="safe" cookable="True"
     enabled="1" expression="" />
