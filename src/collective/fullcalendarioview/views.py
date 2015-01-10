@@ -9,7 +9,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile as \
 from zope.i18nmessageid import MessageFactory
 
 
-_ = MessageFactory("johnpatrick.theme")
+_ = MessageFactory("collective.fullcalendarioview")
 
 
 class CalendarView(BrowserView):
