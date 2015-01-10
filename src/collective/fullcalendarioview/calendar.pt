@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:use-macro="context/main_template/macros/master">
+
+    <metal:block fill-slot="top_slot"
+           tal:define="dummy python:request.set('disable_border',1)" />
+     <metal:block fill-slot="style_slot">
+        <link href='++theme++johnpatrick.theme/static/fullcalendar/fullcalendar.css' rel='stylesheet' />
+        <link href='++theme++johnpatrick.theme/static/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+       <style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+		
+	#loading {
+		display: none;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+     </style>
+    </metal:block>
+      <metal:block fill-slot="javascript_head_slot">
+        <script src='++theme++johnpatrick.theme/static/fullcalendar/lib/moment.min.js'></script>
+        <script src='++theme++johnpatrick.theme/static/fullcalendar/lib/jquery.min.js'></script>
+        <script src='++theme++johnpatrick.theme/static/jquery-migrate-1.2.1.js'></script>
+        <script src='++theme++johnpatrick.theme/static/fullcalendar/fullcalendar.min.js'></script>
+        <script src='++theme++johnpatrick.theme/static/fullcalendar/gcal.js'></script>
+        <script>
+
+	$(document).ready(function() {
+	
+		$('#calendar').fullCalendar({
+
+                        header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			//defaultDate: '2014-11-12',
+			googleCalendarApiKey: 'AIzaSyCDBxs43modVxCd1sg5FALloqGmW9WLxTg',
+		
+			events: 'johnsallypatrick@gmail.com',
+			
+			eventClick: function(event) {
+				// opens events in a popup window
+				window.open(event.url, 'gcalevent', 'width=700,height=600');
+				return false;
+			},
+			
+			loading: function(bool) {
+				$('#loading').toggle(bool);
+			}
+			
+		});
+		
+	});
+
+      </script>
+      </metal:block>
+
+    <metal:block fill-slot="main">
+
+	<div id='loading'>loading...</div>
+
+	<div id='calendar'></div>
+
+   </metal:block>
+</html>
