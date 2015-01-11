@@ -29,9 +29,12 @@ _ = MessageFactory("collective.fullcalendarioview")
 
 class ISettings(form.Schema):
     """ Define settings data structure """
-    adminLanguage = schema.TextLine(title=_(u"Google API Key"),
-        description=_(u"Add your Google issued API key. For more information visit:                      https://developers.google.com/google-apps/calendar/auth"),
+    google_apikey = schema.TextLine(title=_(u"Google API Key"),
+    description=_(u"Add your Google issued API key. For more information visit:                      https://developers.google.com/google-apps/calendar/auth"),
         required=True)
+    calendar_address = schema.TextLine(title=_(u"Calendar Address"),
+    description=_(u"This is usually in the form of an email address associated with a public Google Calendar"),
+         required=True)
     
 
 class SettingsEditForm(RegistryEditForm):

@@ -37,44 +37,14 @@
         <script src='++resource++collective.fullcalendarioview/jquery-migrate-1.2.1.js'></script>
         <script src='++resource++collective.fullcalendarioview/fullcalendar/fullcalendar.min.js'></script>
         <script src='++resource++collective.fullcalendarioview/fullcalendar/gcal.js'></script>
-        <script>
-
-	$(document).ready(function() {
-	
-		$('#calendar').fullCalendar({
-
-                        header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-			//defaultDate: '2014-11-12',
-			googleCalendarApiKey: 'AIzaSyCDBxs43modVxCd1sg5FALloqGmW9WLxTg',
-		
-			events: 'johnsallypatrick@gmail.com',
-			
-			eventClick: function(event) {
-				// opens events in a popup window
-				window.open(event.url, 'gcalevent', 'width=700,height=600');
-				return false;
-			},
-			
-			loading: function(bool) {
-				$('#loading').toggle(bool);
-			}
-			
-		});
-		
-	});
-
-      </script>
       </metal:block>
 
     <metal:block fill-slot="main">
-
-	<div id='loading'>loading...</div>
-
-	<div id='calendar'></div>
-
+     
+    <div id='loading'>loading...</div>
+    <div id='calendar'></div>
+   <tal:script tal:content="structure view/js">fullcalendar.io script is loaded here
+   </tal:script>
+   
    </metal:block>
 </html>

@@ -1,13 +1,11 @@
 <registry>
-    <records interface="collective.fullcalendarioview.settings.ISettings" prefix="fullcalendarioview.settings.ISettings">
+    <records interface="collective.fullcalendarioview.settings.ISettings" 
+             prefix="collective.fullcalendarioview.settings.ISettings">
         <!-- Set default values -->
 
         <!-- Leave to empty string -->
-        <value key="apikey"></value>
+        <value key="google_apikey"></value>
+        <value key="calendar_address"></value>
     </records>
-
-
-
-
 
 </registry>
