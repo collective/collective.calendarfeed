@@ -35,6 +35,13 @@
         template="calendar.pt"
         class=".views.CalendarView"
     />
+   <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="calendar-events"
+        permission="zope2.View"
+        template="calendar-events.pt"
+        class=".views.CalendarView"
+    />
    <plone:portlet
         name="collective.GoogleCalendarFeedPortlet"
         interface=".portlets.IGoogleCalendarFeedPortlet"

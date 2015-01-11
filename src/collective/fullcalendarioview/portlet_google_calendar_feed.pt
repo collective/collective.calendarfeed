@@ -35,5 +35,5 @@
         </span>
         <span class="portletBottomRight"></span>
     </dd>
-<script src="++resource++collective.js.moment/lang/en.js"></script>
+<script src="++resource++collective.js.moment/moment.js"></script>
 </dl>

@@ -76,6 +76,13 @@ class IStaticPortlet(IPortletDataProvider):
             "without the standard header, border or footer."),
         required=True,
         default=False)
+    
+    maxitems = schema.Int(
+        title=_(u"Maximum Items"),
+        description=_(u"Number of items to show. Leave blank to show all"
+            ),
+        required=False,
+        default=4)
 
     footer = schema.TextLine(
         title=_(u"Portlet footer"),
@@ -105,13 +112,14 @@ class Assignment(base.Assignment):
     more_url = ''
 
     def __init__(self, header=u"", text=u"", calendar_address=u"",
-                   google_apikey=u"", omit_border=False, footer=u"",
+                   google_apikey=u"", maxitems=4, omit_border=False, footer=u"",
                    more_url=''):
         self.header = header
         self.text = text
         self.omit_border = omit_border
         self.footer = footer
         self.more_url = more_url
+        self.maxitems = maxitems
         self.calendar_address = calendar_address
         self.google_apikey = google_apikey
 
@@ -155,20 +163,29 @@ class Renderer(base.Renderer):
           "apikey": self.data.google_apikey,
           "baseurl": "https://www.googleapis.com/calendar/v3/calendars",
           "calendarid" : self.data.calendar_address,
-          "css_class" : self.css_class()
+          "css_class" : self.css_class(),
+          "max"     : self.data.maxitems
           }
        
         js_script = """<script type="text/javascript">
 $(document).ready(function() {
-var url =  "%(baseurl)s/%(calendarid)s/events?singleEvents=true&key=%(apikey)s";
+var url =  "%(baseurl)s/%(calendarid)s/events?singleEvents=true&key=%(apikey)s&maxResults=%(max)s";
 $.getJSON(url, function(data) {
     for(i in data['items']) {
         item = data['items'][i];
+        var date = '';
+        if ('dateTime' in item.start) {
+           date = item.start.dateTime.split("T")[0]
+        }  
+        if ('date' in item.start) {
+           date = item.start.date;
+        } 
+        date = moment(date, "YYYY-MM-DD").format('MMMM Do YYYY')
         $(".portlet.%(css_class)s").append(
         "<dd class='portletItem google-calendar-feed-event'>" 
-        + "<a class='event' href='" + item.htmlLink + "'>" + item.summary + "</a>" 
+        + "<a class='item-event' href='" + item.htmlLink + "'>" + item.summary + "</a>" 
         + "<br />"
-        + "<span class='date'>" + item.start.dateTime + "</span><br />" 
+        + "<span class='item-date'>" + date + "</span><br />" 
         + "</dd>"
         );
     }
