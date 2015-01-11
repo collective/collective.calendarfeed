@@ -40,7 +40,11 @@
       </metal:block>
 
     <metal:block fill-slot="main">
-     
+   <div tal:condition="view/canManageSite" id="calendar-edit" class="calendar-edit">
+   <a     class="button"
+          tal:attributes="href 
+          string:${context/@@plone_portal_state/portal_url}/@@fullcalendarioview-settings">manage calendar settings</a>
+   </div>  
     <div id='loading'>loading...</div>
     <div id='calendar'></div>
    <tal:script tal:content="structure view/js">fullcalendar.io script is loaded here

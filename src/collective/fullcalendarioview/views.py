@@ -3,7 +3,9 @@ from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory("collective.fullcalendarioview")
 
+
 from zope.component import getUtility
+from zope.security import checkPermission
 from plone.registry.interfaces import IRegistry
 
 
@@ -13,6 +15,9 @@ class CalendarView(BrowserView):
         self.context = context
         self.request = request
         
+    def canManageSite(self):
+        return checkPermission('cmf.ManagePortal', self.context)
+      
     def js(self):
         registry = getUtility(IRegistry)
         return """<script>
