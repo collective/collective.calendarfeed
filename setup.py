@@ -27,9 +27,11 @@ setup(name='collective.fullcalendarioview',
       zip_safe=False,
       install_requires=[
          "setuptools",
+         "collective.js.moment",
          "five.grok",
          "plone.app.registry",
-          # -*- Extra requirements: -*-
+         "requests",
+    # -*- Extra requirements: -*-
       ],
       entry_points="""
       # -*- Entry points: -*-

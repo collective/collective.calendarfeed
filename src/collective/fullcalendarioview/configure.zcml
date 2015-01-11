@@ -9,7 +9,9 @@
     i18n_domain="collective.fullcalendarioview">
 
   <include package="five.grok" />
+  <include package="plone.app.portlets" />
 
+        
   <!-- <five:registerPackage package="." initialize=".initialize" />
    -->
 
@@ -33,6 +35,17 @@
         template="calendar.pt"
         class=".views.CalendarView"
     />
-
+   <plone:portlet
+        name="collective.GoogleCalendarFeedPortlet"
+        interface=".portlets.IGoogleCalendarFeedPortlet"
+         assignment=".portlets.GoogleCalendarFeedAssignment"
+         view_permission="zope2.View"
+         edit_permission="cmf.ManagePortal"
+         renderer=".portlets.GoogleCalendarFeedRenderer"
+         addview=".portlets.GoogleCalendarFeedAddForm"
+         editview=".portlet_edit.EditForm"
+         />
+         <!-- editview="plone.portlet.static.static.EditForm"
+          -->
 
 </configure>

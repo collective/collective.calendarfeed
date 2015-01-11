@@ -2,8 +2,8 @@
 .DS_Store
 *.mo
 *.egg
+*.egg-info
 /.installed.cfg
-johnpatrick.theme.egg-info
 dist/
 /bin/
 /develop-eggs/
