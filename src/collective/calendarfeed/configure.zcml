@@ -6,7 +6,7 @@
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="collective.fullcalendarioview">
+    i18n_domain="collective.calenderfeed">
 
   <include package="five.grok" />
   <include package="plone.app.portlets" />
@@ -20,13 +20,13 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="Collective Fullcalendar.io view"
+      title="Collective Calendar Feed"
       directory="profiles/default"
-      description="Extension profile for Collective Fullcalendar.io view"
+      description="Extension profile for Collective Calendar Feed"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
    <browser:resourceDirectory
-     name="collective.fullcalendarioview"
+     name="collective.calendarfeed"
      directory="static" />
    <browser:page
         for="Products.CMFCore.interfaces.ISiteRoot"
@@ -43,16 +43,14 @@
         class=".views.CalendarView"
     />
    <plone:portlet
-        name="collective.GoogleCalendarFeedPortlet"
-        interface=".portlets.IGoogleCalendarFeedPortlet"
-         assignment=".portlets.GoogleCalendarFeedAssignment"
+        name="collective.CalendarFeedPortlet"
+        interface=".portlets.ICalendarFeedPortlet"
+         assignment=".portlets.CalendarFeedAssignment"
          view_permission="zope2.View"
          edit_permission="cmf.ManagePortal"
-         renderer=".portlets.GoogleCalendarFeedRenderer"
-         addview=".portlets.GoogleCalendarFeedAddForm"
+         renderer=".portlets.CalendarFeedRenderer"
+         addview=".portlets.CalendarFeedAddForm"
          editview=".portlet_edit.EditForm"
          />
-         <!-- editview="plone.portlet.static.static.EditForm"
-          -->
 
 </configure>

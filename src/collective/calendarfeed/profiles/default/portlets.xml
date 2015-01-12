@@ -1,0 +1,9 @@
+<portlets>
+
+  <portlet
+    addview="collective.CalendarFeedPortlet"
+    title="Calendar Feed Portlet"
+    description="Portlet that shows a Calendar Feed"
+    />
+
+</portlets>

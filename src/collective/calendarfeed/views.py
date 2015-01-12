@@ -1,8 +1,7 @@
 from Products.Five import BrowserView
 from zope.i18nmessageid import MessageFactory
 
-_ = MessageFactory("collective.fullcalendarioview")
-
+_ = MessageFactory("collective.calendarfeed")
 
 from zope.component import getUtility
 from zope.security import checkPermission
@@ -43,9 +42,9 @@ class CalendarView(BrowserView):
  });
 </script>""" % {
    "google_apikey":
-   registry['collective.fullcalendarioview.settings.ISettings.google_apikey'],
+   registry['collective.calendarfeed.settings.ISettings.google_apikey'],
    "calendar_address":
-   registry['collective.fullcalendarioview.settings.ISettings.calendar_address']
+   registry['collective.calendarfeed.settings.ISettings.calendar_address']
                     }
 
 #        return super(CalendarView, self).__call__()

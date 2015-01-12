@@ -5,4 +5,5 @@ Changelog
 -------------------
 
 - Initial release
+- renamed package to collective.calendarfeed from collective.fullcalendarioview
 

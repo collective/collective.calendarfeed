@@ -6,8 +6,8 @@
     <metal:block fill-slot="top_slot"
            tal:define="dummy python:request.set('disable_border',1)" />
      <metal:block fill-slot="style_slot">
-        <link href='++resource++collective.fullcalendarioview/fullcalendar/fullcalendar.css' rel='stylesheet' />
-        <link href='++resource++collective.fullcalendarioview/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+        <link href='++resource++collective.calendarfeed/fullcalendar/fullcalendar.css' rel='stylesheet' />
+        <link href='++resource++collective.calendarfeed/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
        <style>
 
 	body {
@@ -32,22 +32,22 @@
      </style>
     </metal:block>
       <metal:block fill-slot="javascript_head_slot">
-        <script src='++resource++collective.fullcalendarioview/fullcalendar/lib/moment.min.js'></script>
-        <script src='++resource++collective.fullcalendarioview/fullcalendar/lib/jquery.min.js'></script>
-        <script src='++resource++collective.fullcalendarioview/jquery-migrate-1.2.1.js'></script>
-        <script src='++resource++collective.fullcalendarioview/fullcalendar/fullcalendar.min.js'></script>
-        <script src='++resource++collective.fullcalendarioview/fullcalendar/gcal.js'></script>
+        <script src='++resource++collective.calendarfeed/fullcalendar/lib/moment.min.js'></script>
+        <script src='++resource++collective.calendarfeed/fullcalendar/lib/jquery.min.js'></script>
+        <script src='++resource++collective.calendarfeed/jquery-migrate-1.2.1.js'></script>
+        <script src='++resource++collective.calendarfeed/fullcalendar/fullcalendar.min.js'></script>
+        <script src='++resource++collective.calendarfeed/fullcalendar/gcal.js'></script>
       </metal:block>
 
     <metal:block fill-slot="main">
    <div tal:condition="view/canManageSite" id="calendar-edit" class="calendar-edit">
    <a     class="button"
           tal:attributes="href 
-          string:${context/@@plone_portal_state/portal_url}/@@fullcalendarioview-settings">manage calendar settings</a>
+          string:${context/@@plone_portal_state/portal_url}/@@calendarfeed-settings">manage calendar settings</a>
    </div>  
     <div id='loading'>loading...</div>
     <div id='calendar'></div>
-   <tal:script tal:content="structure view/js">fullcalendar.io script is loaded here
+   <tal:script tal:content="structure view/js">calendar javascript is loaded here
    </tal:script>
    
    </metal:block>

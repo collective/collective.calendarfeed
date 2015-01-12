@@ -1,6 +1,6 @@
 <registry>
-    <records interface="collective.fullcalendarioview.settings.ISettings" 
-             prefix="collective.fullcalendarioview.settings.ISettings">
+    <records interface="collective.calendarfeed.settings.ISettings" 
+             prefix="collective.calendarfeed.settings.ISettings">
         <!-- Set default values -->
 
         <!-- Leave to empty string -->

@@ -1,9 +1,0 @@
-<portlets>
-
-  <portlet
-    addview="collective.GoogleCalendarFeedPortlet"
-    title="Google Calendar Feed Portlet"
-    description="Portlet that shows a Google Calendar Feed"
-    />
-
-</portlets>

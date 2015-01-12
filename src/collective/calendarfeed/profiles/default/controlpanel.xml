@@ -3,12 +3,12 @@
     name="portal_controlpanel">
 
     <configlet
-        title="FullCalendar.io View"
-        action_id="fullcalenderioview.settings"
-        appId="fullcalenderioview"
+        title="Calendar Feed Settings"
+        action_id="calendarfeed.settings"
+        appId="calenderfeedsettings"
         category="Products"
         condition_expr=""
-        url_expr="string:${portal_url}/@@fullcalendarioview-settings"
+        url_expr="string:${portal_url}/@@calendarfeed-settings"
         icon_expr=""
         visible="True">
             <permission>Manage portal</permission>

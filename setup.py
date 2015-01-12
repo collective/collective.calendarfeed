@@ -3,10 +3,10 @@ import os
 
 version = '2.2.3'
 
-setup(name='collective.fullcalendarioview',
+setup(name='collective.calendarfeed',
       version=version,
-      description="Collective FullCalendar.io view",
-      long_description=open("README.txt").read() + "\n" +
+      description="Collective Calendarfeed (for Google)",
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -15,10 +15,10 @@ setup(name='collective.fullcalendarioview',
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
-      keywords='Fullcalendario view,Google Calendar,Portlet,View',
+      keywords='Fullcalendar.io view,Google Calendar,Portlet,View',
       author='David Bain',
-      author_email='pigeonflight@gmail.com',
-      url='http://github.com/collective/collective.fullcalendarview/',
+      author_email='david@alteroo.com',
+      url='http://github.com/collective/collective.calendarfeed/',
       license='GPL',
       packages=find_packages('src'),
       package_dir={'': 'src'},

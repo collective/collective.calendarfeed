@@ -1,6 +1,6 @@
 """
 
-    Settings for collective.fullcalendarioview
+    Settings for collective.calendarfeed
 
 """
 
@@ -25,12 +25,12 @@ from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
 
 from zope.i18nmessageid import MessageFactory
 
-_ = MessageFactory("collective.fullcalendarioview")
+_ = MessageFactory("collective.calendarfeed")
 
 class ISettings(form.Schema):
     """ Define settings data structure """
     google_apikey = schema.TextLine(title=_(u"Google API Key"),
-    description=_(u"Add your Google issued API key. For more information visit:                      https://developers.google.com/google-apps/calendar/auth"),
+    description=_(u"Add your Google issued API key. For more information visit: https://developers.google.com/google-apps/calendar/auth"),
         required=True)
     calendar_address = schema.TextLine(title=_(u"Calendar Address"),
     description=_(u"This is usually in the form of an email address associated with a public Google Calendar"),
@@ -42,14 +42,14 @@ class SettingsEditForm(RegistryEditForm):
     Define form logic
     """
     schema = ISettings
-    label = _(u"Collective FullCalendar.io View settings")
+    label = _(u"Collective Calendarfeed View settings")
 
 
 class SettingsView(View):
     """
 
     """
-    grok.name("fullcalendarioview-settings")
+    grok.name("calendarfeed-settings")
     grok.context(ISiteRoot)
     grok.require("cmf.ManagePortal")
 

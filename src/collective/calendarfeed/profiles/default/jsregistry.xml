@@ -19,7 +19,7 @@
 
 
  <javascript
-    id="++resource++collective.fullcalendarioview/main.js"
+    id="++resource++collective.calendarfeed/main.js"
     cacheable="False" compression="safe" cookable="False"
     enabled="True" expression=""  inline="False" />
 

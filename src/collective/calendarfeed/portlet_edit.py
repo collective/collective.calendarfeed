@@ -17,33 +17,35 @@ from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from plone.portlet.static import PloneMessageFactory as _
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory("collective.calendarfeed")
 
 from zope.component import getUtility
 from zope.security import checkPermission
 from plone.registry.interfaces import IRegistry
 
-logger = logging.getLogger('collective.fullcalendarioview.portlets')
+logger = logging.getLogger('collective.calendarfeed')
 
 try:
     registry = getUtility(IRegistry)
 except ComponentLookupError:
     registry = {
-        'collective.fullcalendarioview.settings.ISettings.google_apikey':
+        'collective.calendarfeed.settings.ISettings.google_apikey':
           u"",
-        'collective.fullcalendarioview.settings.ISettings.calendar_address':
+        'collective.calendarfeed.settings.ISettings.calendar_address':
           u""
         }
         
-fullcalendarioview_settings = {
+calendarfeed_settings = {
     "google_apikey":
-    registry['collective.fullcalendarioview.settings.ISettings.google_apikey'],
+    registry['collective.calendarfeed.settings.ISettings.google_apikey'],
     "calendar_address":
-   registry['collective.fullcalendarioview.settings.ISettings.calendar_address']
+   registry['collective.calendarfeed.settings.ISettings.calendar_address']
                     }
 
 
-class IGoogleCalendarFeedPortlet(IPortletDataProvider):
+class ICalendarFeedPortlet(IPortletDataProvider):
     """A portlet which renders a google calendar feeed
     
     It inherits from IPortletDataProvider because for this portlet, the
@@ -51,14 +53,14 @@ class IGoogleCalendarFeedPortlet(IPortletDataProvider):
     same.
     """
     google_apikey = schema.TextLine(
-        title=_(u"Google Calendar API key"),
+        title=_(u" Calendar API key"),
         description=_(u"Calendar API key from google"),
-        default = fullcalendarioview_settings['google_apikey'],
+        default = calendarfeed_settings['google_apikey'],
         required=True)
     calendar_address = schema.TextLine(
         title=_(u"Calendar Address"),
         description=_(u"Address of the google calendar feed usually in the form 'user-calendar@gmail.com'"),
-        default = fullcalendarioview_settings['calendar_address'],
+        default = calendarfeed_settings['calendar_address'],
         required=False)
     header = schema.TextLine(
         title=_(u"Portlet header"),
@@ -81,7 +83,7 @@ class IGoogleCalendarFeedPortlet(IPortletDataProvider):
     footer = schema.TextLine(
         title=_(u"Portlet footer"),
         description=_(u"Text to be shown in the footer," 
-                      " you could use this to link to the fullcalendar"),
+                      " you could use this to link to the calendar page"),
         required=False)
 
     more_url = schema.ASCIILine(
@@ -98,9 +100,9 @@ class Assignment(base.Assignment):
     with columns.
     """
 
-    implements(IGoogleCalendarFeedPortlet)
+    implements(ICalendarFeedPortlet)
 
-    header = _(u"title_google_calendar_feed_portlet", default=u"Google Calendar Feed portlet")
+    header = _(u"title_google_calendar_feed_portlet", default=u" Calendar Feed portlet")
     text = u""
     footer = u""
     more_url = ''
@@ -122,7 +124,7 @@ class Assignment(base.Assignment):
         "manage portlets" screen. Here, we use the title that the user gave or
         static string if title not defined.
         """
-        return self.header or _(u'portlet_google_calendar_feed', default=u"Google Calendar Feed Portlet")
+        return self.header or _(u'portlet_calendar_feed', default=u" Calendar Feed Portlet")
 
 
 class Renderer(base.Renderer):
@@ -133,7 +135,7 @@ class Renderer(base.Renderer):
     of this class. Other methods can be added and referenced in the template.
     """
 
-    render = ViewPageTemplateFile('portlet_google_calendar_feed.pt')
+    render = ViewPageTemplateFile('portlet_calendar_feed.pt')
 
     def css_class(self):
         """Generate a CSS class from the portlet header
@@ -141,8 +143,8 @@ class Renderer(base.Renderer):
         header = self.data.header
         if header:
             normalizer = getUtility(IIDNormalizer)
-            return "portlet-google-calendar-feed-%s" % normalizer.normalize(header)
-        return "portlet-google-calendar-feed"
+            return "portlet-calendar-feed-%s" % normalizer.normalize(header)
+        return "portlet-calendar-feed"
 
     def has_link(self):
         return bool(self.data.more_url)
@@ -178,7 +180,7 @@ $.getJSON(url, function(data) {
         } 
         date = moment(date, "YYYY-MM-DD").format('MMMM Do YYYY')
         $(".portlet.%(css_class)s").append(
-        "<dd class='portletItem google-calendar-feed-event'>" 
+        "<dd class='portletItem google-feed-event'>" 
         + "<a class='item-event' href='" + item.htmlLink + "'>" + item.summary + "</a>" 
         + "<br />"
         + "<span class='item-date'>" + date + "</span><br />" 
@@ -217,7 +219,7 @@ $.getJSON(url, function(data) {
             # which stored text directly as sent by the browser, which could
             # be any encoding in the world.
             orig = unicode(orig, 'utf-8', 'ignore')
-            logger.warn("Google Calendar Feed portlet at %s has stored non-unicode text. "
+            logger.warn(" Calendar Feed portlet at %s has stored non-unicode text. "
                 "Assuming utf-8 encoding." % context.absolute_url())
 
         # Portal transforms needs encoded strings
@@ -241,11 +243,11 @@ class AddForm(base.AddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    form_fields = form.Fields(IGoogleCalendarFeedPortlet)
+    form_fields = form.Fields(ICalendarFeedPortlet)
     form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_add_google_calendar_feed_portlet", default=u"Add Google Calendar Feed portlet")
-    description = _(u"Google Calendar Feed Portlet",
-        default=u"A portlet which displays a Google Calendar feed.")
+    label = _(u"title_add_calendar_feed_portlet", default=u"Add Calendar Feed portlet")
+    description = _(u"Calendar Feed Portlet",
+        default=u"A portlet which displays a Calendar feed.")
 
     def create(self, data):
         return Assignment(**data)
@@ -257,8 +259,8 @@ class EditForm(base.EditForm):
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    form_fields = form.Fields(IGoogleCalendarFeedPortlet)
+    form_fields = form.Fields(ICalendarFeedPortlet)
     form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_edit_google_calendar_feed_portlet", default=u"Edit google calendar feed portlet")
-    description = _(u"description_google_calendar_feed_portlet",
+    label = _(u"title_edit_calendar_feed_portlet", default=u"Edit google calendar feed portlet")
+    description = _(u"description_calendar_feed_portlet",
         default=u"A portlet which can display google calendar feed HTML text.")
