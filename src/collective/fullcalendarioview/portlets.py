@@ -9,11 +9,11 @@ _ = MessageFactory("collective.fullcalendarioview")
 
 # Import the base portlet module whose properties we will modify
 # from plone.portlet.static import static
-from .portlet_edit import AddForm,Assignment,IStaticPortlet,Renderer
+from .portlet_edit import AddForm,Assignment,IGoogleCalendarFeedPortlet,Renderer
 
-class IGoogleCalendarFeedPortlet(IStaticPortlet):
-    """ Defines a new portlet "Google Calendar Feed" which takes properties of the existing static text portlet. """
-    pass
+#class IGoogleCalendarFeedPortlet(IStaticPortlet):
+#    """ Defines a new portlet "Google Calendar Feed" which takes properties of the existing static text portlet. """
+#    pass
 
 class GoogleCalendarFeedRenderer(Renderer):
     """ Overrides static.pt in the rendering of the portlet. """

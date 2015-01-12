@@ -1,8 +1,5 @@
-<div tal:condition="view/data/omit_border"
-     tal:attributes="class string:portletStaticText ${view/css_class}"
-     tal:content="structure view/data/text" />
-<dl tal:condition="not:view/data/omit_border"
-    tal:attributes="class string:portlet portletStaticText portletGoogleCalendarFeed ${view/css_class}"
+<dl 
+    tal:attributes="class string:portlet portletGoogleCalendarFeed ${view/css_class}"
     i18n:domain="plone">
 
     <dt class="portletHeader">
@@ -16,8 +13,7 @@
         <span class="portletTopRight"></span>
     </dt>
 
-    <dd class="portletItem odd">
-        <div tal:replace="structure view/js/script" />
+    <dd tal:condition="view/data/text|nothing" class="portletItem odd">
         <div tal:replace="structure view/data/text" />
         <tal:corners condition="not:view/has_footer">
             <span class="portletBottomLeft"></span>
@@ -36,4 +32,5 @@
         <span class="portletBottomRight"></span>
     </dd>
 <script src="++resource++collective.js.moment/moment.js"></script>
+<div tal:replace="structure view/js/script" />
 </dl>

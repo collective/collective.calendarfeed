@@ -43,9 +43,9 @@ fullcalendarioview_settings = {
                     }
 
 
-class IStaticPortlet(IPortletDataProvider):
-    """A portlet which renders predefined static HTML.
-
+class IGoogleCalendarFeedPortlet(IPortletDataProvider):
+    """A portlet which renders a google calendar feeed
+    
     It inherits from IPortletDataProvider because for this portlet, the
     data that is being rendered and the portlet assignment itself are the
     same.
@@ -67,16 +67,9 @@ class IStaticPortlet(IPortletDataProvider):
         required=False)
 
     text = schema.Text(
-        title=_(u"Text"),
-        description=_(u"The text to render"),
-        required=True)
-
-    omit_border = schema.Bool(
-        title=_(u"Omit portlet border"),
-        description=_(u"Tick this box if you want to render the text above "
-            "without the standard header, border or footer."),
-        required=True,
-        default=False)
+        title=_(u"Content before feed (optional)"),
+        description=_(u"Content added here will go before the calendar feed"),
+        required=False)
     
     maxitems = schema.Int(
         title=_(u"Maximum Items"),
@@ -87,7 +80,8 @@ class IStaticPortlet(IPortletDataProvider):
 
     footer = schema.TextLine(
         title=_(u"Portlet footer"),
-        description=_(u"Text to be shown in the footer"),
+        description=_(u"Text to be shown in the footer," 
+                      " you could use this to link to the fullcalendar"),
         required=False)
 
     more_url = schema.ASCIILine(
@@ -104,20 +98,18 @@ class Assignment(base.Assignment):
     with columns.
     """
 
-    implements(IStaticPortlet)
+    implements(IGoogleCalendarFeedPortlet)
 
-    header = _(u"title_static_portlet", default=u"Google Calendar Feed portlet")
+    header = _(u"title_google_calendar_feed_portlet", default=u"Google Calendar Feed portlet")
     text = u""
-    omit_border = False
     footer = u""
     more_url = ''
 
     def __init__(self, header=u"", text=u"", calendar_address=u"",
-                   google_apikey=u"", maxitems=4, omit_border=False, footer=u"",
+                   google_apikey=u"", maxitems=4, footer=u"",
                    more_url=''):
         self.header = header
         self.text = text
-        self.omit_border = omit_border
         self.footer = footer
         self.more_url = more_url
         self.maxitems = maxitems
@@ -130,7 +122,7 @@ class Assignment(base.Assignment):
         "manage portlets" screen. Here, we use the title that the user gave or
         static string if title not defined.
         """
-        return self.header or _(u'portlet_static', default=u"Static Portlet")
+        return self.header or _(u'portlet_google_calendar_feed', default=u"Google Calendar Feed Portlet")
 
 
 class Renderer(base.Renderer):
@@ -149,8 +141,8 @@ class Renderer(base.Renderer):
         header = self.data.header
         if header:
             normalizer = getUtility(IIDNormalizer)
-            return "portlet-static-%s" % normalizer.normalize(header)
-        return "portlet-static"
+            return "portlet-google-calendar-feed-%s" % normalizer.normalize(header)
+        return "portlet-google-calendar-feed"
 
     def has_link(self):
         return bool(self.data.more_url)
@@ -225,7 +217,7 @@ $.getJSON(url, function(data) {
             # which stored text directly as sent by the browser, which could
             # be any encoding in the world.
             orig = unicode(orig, 'utf-8', 'ignore')
-            logger.warn("Static portlet at %s has stored non-unicode text. "
+            logger.warn("Google Calendar Feed portlet at %s has stored non-unicode text. "
                 "Assuming utf-8 encoding." % context.absolute_url())
 
         # Portal transforms needs encoded strings
@@ -249,11 +241,11 @@ class AddForm(base.AddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    form_fields = form.Fields(IStaticPortlet)
+    form_fields = form.Fields(IGoogleCalendarFeedPortlet)
     form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_add_static_portlet", default=u"Add static text portlet")
-    description = _(u"description_static_portlet",
-        default=u"A portlet which can display static HTML text.")
+    label = _(u"title_add_google_calendar_feed_portlet", default=u"Add Google Calendar Feed portlet")
+    description = _(u"Google Calendar Feed Portlet",
+        default=u"A portlet which displays a Google Calendar feed.")
 
     def create(self, data):
         return Assignment(**data)
@@ -265,8 +257,8 @@ class EditForm(base.EditForm):
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    form_fields = form.Fields(IStaticPortlet)
+    form_fields = form.Fields(IGoogleCalendarFeedPortlet)
     form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_edit_static_portlet", default=u"Edit static text portlet")
-    description = _(u"description_static_portlet",
-        default=u"A portlet which can display static HTML text.")
+    label = _(u"title_edit_google_calendar_feed_portlet", default=u"Edit google calendar feed portlet")
+    description = _(u"description_google_calendar_feed_portlet",
+        default=u"A portlet which can display google calendar feed HTML text.")
