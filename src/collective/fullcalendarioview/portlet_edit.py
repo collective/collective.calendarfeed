@@ -2,6 +2,7 @@ import re
 import requests
 import logging
 
+from datetime import date
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
@@ -156,7 +157,8 @@ class Renderer(base.Renderer):
 
     def has_footer(self):
         return bool(self.data.footer)
-      
+    
+    @property
     def js(self):
     
         params = {
@@ -164,12 +166,14 @@ class Renderer(base.Renderer):
           "baseurl": "https://www.googleapis.com/calendar/v3/calendars",
           "calendarid" : self.data.calendar_address,
           "css_class" : self.css_class(),
-          "max"     : self.data.maxitems
+          "max"     : self.data.maxitems,
+          "now" : u"%sT00:00:00Z" % unicode(date.today().isoformat())
           }
-       
+         
+        url =  "%(baseurl)s/%(calendarid)s/events?singleEvents=true&timeMin=%(now)s&maxResults=%(max)s&orderBy=startTime&key=%(apikey)s" % params
         js_script = """<script type="text/javascript">
 $(document).ready(function() {
-var url =  "%(baseurl)s/%(calendarid)s/events?singleEvents=true&key=%(apikey)s&maxResults=%(max)s";
+var url =  "%(baseurl)s/%(calendarid)s/events?singleEvents=true&timeMin=%(now)s&maxResults=%(max)s&orderBy=startTime&key=%(apikey)s";
 $.getJSON(url, function(data) {
     for(i in data['items']) {
         item = data['items'][i];
@@ -193,7 +197,10 @@ $.getJSON(url, function(data) {
 });
 </script>
 """
-        return js_script % params
+        return {
+          "script":js_script % params,
+          "url":url
+         }       
       
     def json_feed(self):
         params = {
