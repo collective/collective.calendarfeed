@@ -17,7 +17,7 @@
     </dt>
 
     <dd class="portletItem odd">
-        <div tal:replace="structure view/js" />
+        <div tal:replace="structure view/js/script" />
         <div tal:replace="structure view/data/text" />
         <tal:corners condition="not:view/has_footer">
             <span class="portletBottomLeft"></span>
